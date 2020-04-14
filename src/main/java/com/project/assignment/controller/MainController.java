@@ -46,20 +46,22 @@ public class MainController {
 	@PostMapping("/user")
 	public ResponseEntity<String> addUser(@RequestBody UserModel userModel) throws JsonProcessingException, URISyntaxException {
 		ResponseEntity<String> response = null;
-        JsonNode responseJson = mapper.createObjectNode();
-        
+
+        userModel.setId(null);
         UserModel createdUser = userService.addUser(userModel);
         
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-    			.buildAndExpand(createdUser.getId()).toUri();
+        URI location = ServletUriComponentsBuilder
+        					.fromCurrentRequest()
+							.path("/{id}")
+							.buildAndExpand(createdUser.getId()).toUri();
         
+        JsonNode responseJson = mapper.createObjectNode();
         ((ObjectNode) responseJson).put("status", HttpStatus.CREATED.value());
         ((ObjectNode) responseJson).put("message", usercreatedMessage);
-        response = ResponseEntity.created(location)
+        response = ResponseEntity
+        			.created(location)
                     .body(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(responseJson));
         
-        
-
         return response;
 	}
 

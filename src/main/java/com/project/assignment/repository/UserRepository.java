@@ -9,5 +9,7 @@ import com.project.assignment.model.UserModel;
 public interface UserRepository extends JpaRepository<UserModel, Long> {
 
 	UserModel getUserById(Long id);
+	
+	UserModel getUserByUsername(String userName);
 
 }

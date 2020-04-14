@@ -1,0 +1,1 @@
+insert into USER_MODEL(ID, USERNAME, PASSWORD, STATUS) values (999999999, 'SUPER_ADMIN', 'SUPER_ADMIN', 'Activated');
